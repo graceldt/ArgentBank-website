@@ -1,11 +1,23 @@
+import { useState } from 'react';
 import Account from '../components/account';
 import AccountButton from '../components/account_button';
-import HeaderUser from '../components/header_user';
+import EditUsername from '../components/edit_username';
+import Username from '../components/username';
 
-function User() {
+const Dashboard = () => {
+    
+    const [open, setOpen]= useState(false)
+
+    function handleOpen (){
+        setOpen(!open)
+    }
     return (
         <div className='bg-dark' >
-            <HeaderUser/>
+            {
+                open ? <EditUsername editData={handleOpen} />
+                : <Username editData={handleOpen}/>
+            }
+            
             <section className='account'>
                 <Account title='Argent Bank Checking (x8349)' amount='$2,082.79' description='Available Balance'/>
                 <AccountButton/>
@@ -27,4 +39,4 @@ function User() {
 
 
 
-export default User;
+export default Dashboard;

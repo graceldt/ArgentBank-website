@@ -6,6 +6,7 @@ import icon_security from '../assets/icon_security.webp';
 
 
 
+
 function Home() {
 
 
@@ -19,6 +20,7 @@ function Home() {
             <FeaturesItem title='Security you can trust'icon={icon_security} paragraph='We use top of the line encryption to make sure your data and money
             is always safe.'/>
             </section>
+            
         </div>
     )
 }
