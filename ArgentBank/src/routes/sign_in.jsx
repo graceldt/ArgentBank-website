@@ -1,13 +1,10 @@
 import Form from "../components/form";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "../app/features/usersSlice";
-import Logout from "./logout";
 
-const SignIn = () => {
-    const user = useSelector(getCurrentUser)
+function SignIn () {
     return (
-        <div>{user ?<Logout/> : <Form/>}</div>
-    );
-};
+        <Form/>
+    )
+}
+    
 
 export default SignIn;

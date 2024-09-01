@@ -4,14 +4,14 @@ import { editUsername } from "../app/features/usersSlice";
 
 
 const EditUsername =(props) =>{
-    const user = useSelector((state) => state);
-    const [username, SetUserName] = useState(user.user.currentUser.userName)
+    const user = useSelector((state) => state.user);
+    const [username, SetUserName] = useState(user.currentUser.userName)
     const dispatch = useDispatch()
 
     function handleSave (e){
         e.preventDefault();
         console.log(username)
-        dispatch(editUsername(username, user.user.token))
+        dispatch(editUsername(username))
     }
 
     return  (
@@ -34,7 +34,7 @@ const EditUsername =(props) =>{
                     <input 
                         className="first-name" 
                         type="text" 
-                        value={user.user.currentUser.firstName}
+                        value={user.currentUser.firstName}
                         readOnly
                     />
                 </div>
@@ -43,7 +43,7 @@ const EditUsername =(props) =>{
                     <input 
                         className="first-name" 
                         type="text" 
-                        value={user.user.currentUser.lastName} 
+                        value={user.currentUser.lastName} 
                         readOnly 
                     />
                 </div>

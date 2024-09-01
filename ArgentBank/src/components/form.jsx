@@ -37,10 +37,7 @@ const Form = () => {
             })
     }
 
-    const loggedIn = useSelector((state) => state.loggedIn);
-    if (loggedIn === false) {
-        navigate('/login');
-    }
+    
 
 
 

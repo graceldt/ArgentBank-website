@@ -19,8 +19,8 @@ export const getCurrentUser = createAsyncThunk(
 
 export const editUsername = createAsyncThunk (
     'usersSlice/EditUsername ',
-    async (userData, token)=> {
-        const {data} = await Axios.put("http://localhost:3001/api/v1/user/profile", {"userName":userData}, {headers: {'Authorization': `Bearer ${token}` }})
+    async (userData, {getState})=> {
+        const {data} = await Axios.put("http://localhost:3001/api/v1/user/profile", {"userName":userData}, {headers: {'Authorization': `Bearer ${getState().user.token}` }})
         return data.body;
     }
 );
@@ -58,18 +58,13 @@ const usersSlice = createSlice({
         })
 
         builder.addCase(getCurrentUser.fulfilled,(state, action) =>{
-            state.currentUser = {
-                id: action.payload.body.id,
-                firstName: action.payload.body.firstName,
-                lastName: action.payload.body.lastName,
-                userName: action.payload.body.userName
-            }
+            state.currentUser = action.payload.body
+            
         })
 
         builder.addCase(editUsername.fulfilled,(state, action) =>{
-            state.currentUser = {
-                userName: action.payload.body.userName
-            }
+            state.currentUser = action.payload
+        
         })
 
     }

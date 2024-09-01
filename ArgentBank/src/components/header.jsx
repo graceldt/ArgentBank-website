@@ -5,7 +5,7 @@ import Logout from './logout';
 import { useSelector } from "react-redux";
 
 function HeaderApp() {
-    const user  = useSelector((state) => state)
+    const user  = useSelector((state) => state.user)
     
     return (
         <nav className='main-nav'>
@@ -13,7 +13,7 @@ function HeaderApp() {
                 <img className='main-nav-logo-image' src={logo} alt="Argent Bank Logo" />
             </NavLink>
             {
-                user.user.token || localStorage.getItem('token') ? <Logout/> : <SignInIcon/> 
+                user.token || localStorage.getItem('token') ? <Logout/> : <SignInIcon/> 
             }
         </nav>
     )
