@@ -66,7 +66,7 @@ paths:
       summary: User Profile API
       description: API for fetching a user profile
       #produces:
-       # - application/json
+      # - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,6 +101,82 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /account/transaction/{month}:   
+    get:
+      tags: 
+        - Transaction Module
+      summary: Find transactions for each account for current month  
+      description: Returns the list of transactions for current month
+      parameters:
+        - in: path
+          name: month
+          description: Information of transactions to return 
+          required: true
+          type : string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions recovered successfully
+          schema:
+            $ref: '#/definitions/TransactionsofMonth'
+        '400':
+          description: transaction not found
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+  /transaction/{id}:
+    get:
+      tags:
+        - Transaction Module 
+      summary: Find transaction by ID
+      description: Returns a single transaction
+      operationId: getTransactionById
+      parameters:
+        - in: path 
+          name: id
+          description: ID of transaction to return
+          required: true
+          type : string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction ID retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid ID supplied
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
+  /transaction:
+    put:
+      tags:
+        - Transaction Module
+      summary: Update transaction
+      description: category or note that needs to be modified
+      parameters:
+        - in: body 
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Update an existing transaction in the account
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      security:
+        - Bearer: []
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -156,3 +232,32 @@ definitions:
     properties:
       userName:
         type: string
+  TransactionsofMonth:
+    type: object
+    properties:
+      month:
+        type: string
+      id : 
+        type: string
+      type : 
+        type: string
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+      date : 
+        type: number
+      description : 
+        type: string
+      amount : 
+        type: number
+      balance : 
+        type : number
+  UpdateTransaction:
+    type: object
+    properties:
+      category:
+        type: string
+      note : 
+        type: string 
