@@ -70,7 +70,7 @@ const usersSlice = createSlice({
             state.currentUser = action.payload
             if(localStorage.getItem('token'))
                 {
-                    sessionStorage.setItem('user',JSON.stringify (action.payload.body))
+                    sessionStorage.setItem('user',JSON.stringify (action.payload))
                 }
         })
 

@@ -10,7 +10,7 @@ const Form = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [remember, setRemember] = useState (false);
+    const [remember, setRemember] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Form = () => {
         dispatch(login({ email, password }, remember))
             .then((response) => {
                 if (remember){
-                    sessionStorage.setItem('token', response.payload.token)
+                    localStorage.setItem('token', response.payload.token)
                 }
                 dispatch(getCurrentUser(response.payload.token))
                     .then((response) => {
