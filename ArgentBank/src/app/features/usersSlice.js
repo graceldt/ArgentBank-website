@@ -7,7 +7,7 @@ export const login = createAsyncThunk (
         const {data} = await Axios.post("http://localhost:3001/api/v1/user/login", userData)
         return data.body;
     }
-);
+)
 
 export const getCurrentUser = createAsyncThunk(
     'usersSlice/getCurrentUser',
@@ -26,9 +26,8 @@ export const editUsername = createAsyncThunk (
 );
 
 const initialState= {
-    token : null,
-    loggedIn: false,
-    currentUser: {},
+    token : localStorage.getItem('token') ? localStorage.getItem('token') : null,
+    currentUser: sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : {},
 }
 
 const usersSlice = createSlice({
@@ -38,7 +37,7 @@ const usersSlice = createSlice({
         logout (state) {
             state.token = null;
             localStorage.clear();
-            state.loggedIn= false;
+            sessionStorage.clear();
             state.currentUser= {};
         }
     },
@@ -47,24 +46,32 @@ const usersSlice = createSlice({
             console.log(action)
             state.token= action.payload.token; 
             state.error = null 
-            state.loggedIn = true; 
+    
         })
 
         builder.addCase(login.rejected, (state, action) =>{
             localStorage.clear();
             state.error = action.error.message;
             console.log(state.error);
-            state.loggedIn=false;
         })
 
         builder.addCase(getCurrentUser.fulfilled,(state, action) =>{
             state.currentUser = action.payload.body
             
+            if(localStorage.getItem('token'))
+                {
+                    sessionStorage.setItem('user',JSON.stringify (action.payload.body))
+                }
+            
+            
         })
 
         builder.addCase(editUsername.fulfilled,(state, action) =>{
             state.currentUser = action.payload
-        
+            if(localStorage.getItem('token'))
+                {
+                    sessionStorage.setItem('user',JSON.stringify (action.payload.body))
+                }
         })
 
     }

@@ -101,13 +101,18 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /account/transaction/{month}:   
+  /transaction/{idAccount}/{month}:   
     get:
       tags: 
         - Transaction Module
       summary: Find transactions for each account for current month  
       description: Returns the list of transactions for current month
       parameters:
+        - in: path 
+          name : idAccount
+          type : integer
+          description: Information of transactions to return 
+          required: true
         - in: path
           name: month
           description: Information of transactions to return 
@@ -138,7 +143,7 @@ paths:
           name: id
           description: ID of transaction to return
           required: true
-          type : string
+          type : integer
       produces:
         - application/json
       responses:

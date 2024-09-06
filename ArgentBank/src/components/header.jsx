@@ -13,7 +13,7 @@ function HeaderApp() {
                 <img className='main-nav-logo-image' src={logo} alt="Argent Bank Logo" />
             </NavLink>
             {
-                user.token || localStorage.getItem('token') ? <Logout/> : <SignInIcon/> 
+                user.token ? <Logout/> : <SignInIcon/> 
             }
         </nav>
     )

@@ -10,6 +10,7 @@ const Form = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [remember, setRemember] = useState (false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,9 +22,11 @@ const Form = () => {
             return
         }
 
-        dispatch(login({ email, password }))
+        dispatch(login({ email, password }, remember))
             .then((response) => {
-                localStorage.setItem('token', response.payload.token)
+                if (remember){
+                    sessionStorage.setItem('token', response.payload.token)
+                }
                 dispatch(getCurrentUser(response.payload.token))
                     .then((response) => {
                         navigate("/dashboard")
@@ -61,7 +64,8 @@ const Form = () => {
                     </div>
 
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" />
+                        <input type="checkbox" id="remember-me"
+                        onChange={(e) => setRemember(e.target.value)} />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
 
