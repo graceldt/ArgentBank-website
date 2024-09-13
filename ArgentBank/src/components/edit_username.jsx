@@ -16,7 +16,7 @@ const EditUsername =(props) =>{
 
     return  (
         <div className="edit-section">
-            <form action="">
+            <form>
                 <h1>Edit User info</h1>
                 <div>
                     <label htmlFor="username">User name: </label>

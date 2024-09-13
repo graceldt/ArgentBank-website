@@ -119,16 +119,16 @@ paths:
           required: true
           type : string
       produces:
-        - application/json
+            - application/json
       responses:
         '200':
-          description: User transactions recovered successfully
+          description: successful operation
           schema:
-            $ref: '#/definitions/TransactionsofMonth'
+                type: array
+                items:
+                  $ref: '#/definitions/TransactionsofMonth'
         '400':
-          description: transaction not found
-        '500':
-          description: Internal Server Error
+          description: Invalid month value
       security:
         - Bearer: []
   /transaction/{id}:
@@ -144,6 +144,7 @@ paths:
           description: ID of transaction to return
           required: true
           type : integer
+          format: int64
       produces:
         - application/json
       responses:
@@ -157,23 +158,23 @@ paths:
           description: Internal Server Error
       security:
         - Bearer: []
-  /transaction:
     put:
       tags:
         - Transaction Module
       summary: Update transaction
       description: category or note that needs to be modified
       parameters:
-        - in: body 
-          name: body
+        - in: path 
+          name: id
           required: true
-          schema:
-            $ref: '#/definitions/UpdateTransaction'
+          type : integer
+          format: int64
       produces:
         - application/json
       responses:
+        
         '200':
-          description: Update an existing transaction in the account
+          description: transaction retrieved successully
           schema:
             $ref: '#/definitions/UpdateTransaction'
         '400':
@@ -240,29 +241,60 @@ definitions:
   TransactionsofMonth:
     type: object
     properties:
-      month:
+      id:
+        type : integer
+        format: int64
+        example: 10
+      date : 
         type: string
-      id : 
-        type: integer
-      type : 
+        format: date
+      description : 
         type: string
+        example : Golden Sun Bakery
+      amount : 
+        type: number
+        example: 8$
+      balance : 
+        type : number
+        example: 298$
   Transaction:
     type: object
     properties:
       id:
-        type: string
+        type : integer
+        format: int64
+        example: 10
       date : 
-        type: number
+        type: string
+        format: date
+      transaction-type: 
+        type : string
+        example: Electronic
+      category:
+        type: string
+        example: Food
+      note : 
+        type: string
+        example: lorem ipsum
       description : 
         type: string
+        example : Golden Sun Bakery 
       amount : 
         type: number
+        example: 8$
       balance : 
         type : number
+        example: 298$
   UpdateTransaction:
     type: object
     properties:
+      id : 
+        type : integer
+        format: int64
+        example: 10
       category:
         type: string
+        example: Food
       note : 
-        type: string 
+        type: string
+        example: lorem ipsum

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "../components/header";
 import Home from "../routes/home";
-import Sign_in from "../components/form";
+import Sign_in from "../routes/Sign_In";
 import Footer from "../components/footer";
 import Dashboard from "../routes/dashboard";
 import { useSelector } from "react-redux";
