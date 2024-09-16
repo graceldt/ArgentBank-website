@@ -29,7 +29,7 @@ const SignIn  = () => {
                         navigate("/dashboard")
                     })
                     .catch((error) => {
-                        throw ('Invalid email or password')
+                        throw ('Invalid token')
                     })
             })
             .catch((error) => {

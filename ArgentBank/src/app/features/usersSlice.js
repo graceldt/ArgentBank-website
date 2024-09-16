@@ -43,7 +43,6 @@ const usersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, action) =>{
-            console.log(action)
             state.token= action.payload.token; 
             state.error = null 
     
@@ -52,7 +51,6 @@ const usersSlice = createSlice({
         builder.addCase(login.rejected, (state, action) =>{
             localStorage.clear();
             state.error = action.error.message;
-            console.log(state.error);
         })
 
         builder.addCase(getCurrentUser.fulfilled,(state, action) =>{

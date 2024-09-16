@@ -10,7 +10,6 @@ const EditUsername =(props) =>{
 
     function handleSave (e){
         e.preventDefault();
-        console.log(username)
         dispatch(editUsername(username))
     }
 
