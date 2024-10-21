@@ -19,7 +19,7 @@ const SignIn  = () => {
             return
         }
 
-        dispatch(login({ email, password }, remember))
+        dispatch(login({ email, password }))
             .then((response) => {
                 if (remember){
                     localStorage.setItem('token', response.payload.token)
